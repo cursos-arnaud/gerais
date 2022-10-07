@@ -141,7 +141,7 @@ EXPOSE 80
 ```
 
 
-## Descrevendo comandos do Dockerfile
+### Descrevendo comandos do Dockerfile
 
 #### Cria uma imagem a partir de uma imagem base
 ```console
@@ -195,7 +195,7 @@ EXPOSE 80
 docker build -t arnaudsa/nginx-com-vim:latest .
 ```
 
-## Publicando a imagem no docker hub
+### Publicando a imagem no docker hub
 
 #### Fazer login no docker hub
 ```console
