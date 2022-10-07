@@ -5,12 +5,12 @@
 docker run ubuntu
 ```
 
-#### executar um container em modo iterativo (-it) para acessar o bash do container
+#### modo iterativo (-it) para acessar o bash do container
 ```console
 docker run -it ubuntu:latest bash
 ```
 
-#### executar um container sem atachar a tela
+#### não atacha a tela
 ```console
 docker run -d ubuntu
 ```
@@ -141,7 +141,7 @@ EXPOSE 80
 ```
 
 
-> Descrevendo comandos do Dockerfile
+## Descrevendo comandos do Dockerfile
 
 #### Cria uma imagem a partir de uma imagem base
 ```console
@@ -195,7 +195,7 @@ EXPOSE 80
 docker build -t arnaudsa/nginx-com-vim:latest .
 ```
 
-#### Publicando a imagem no docker hub
+## Publicando a imagem no docker hub
 
 #### Fazer login no docker hub
 ```console
