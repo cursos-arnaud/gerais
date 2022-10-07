@@ -15,27 +15,27 @@ docker run -it ubuntu:latest bash
 docker run -d ubuntu
 ```
 
-#### executar um container e definir um nome
+#### define um nome para o container
 ```console
 docker run --name ubu ubuntu
 ```
 
-#### executar um container expondo uma porta para acesso
+#### expondo uma porta para acesso
 ```console
 docker run -p 8080:80 nginx
 ```
 
-#### Executando um comando em um container e entrando no modo iterativo no bash do container
+#### entrando no modo iterativo em um container em execução com o nome nginx no bash do container
 ```console
 docker exec -it nginx bash
 ```
 
-#### executar um container compartilhando um volume
+#### compartilhando um volume
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
 ```
 
-#### executar um container compartilhando um volume com mount
+#### compartilhando um volume com mount
 ```console
 docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
@@ -50,7 +50,7 @@ docker volume create meuvolume
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
 
-#### Comando full com todos parâmetros acima
+#### Executando um container com todos os parâmetros acima
 ```console
 docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
@@ -116,6 +116,7 @@ docker images
 ```console
 docker rmi nginx
 ```
+<br/><br/>
 
 # Criando uma imagem
 
@@ -147,7 +148,7 @@ EXPOSE 80
 ```console
 FROM <image name>
 ```
-#### Executa um comando para atualizar meus pacotes e instala o vim
+#### Executa um comando para atualizar os pacotes e instala o vim
 ```console
 RUN apt-get update && apt-get install vim -y
 ```
@@ -190,7 +191,7 @@ EXPOSE 80
 ```
 
 
-#### Realizando o build da imagem
+#### Faz o build da imagem
 ```console
 docker build -t arnaudsa/nginx-com-vim:latest .
 ```
