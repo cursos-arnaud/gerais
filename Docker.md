@@ -216,6 +216,13 @@ docker push arnaudsa/nginx-com-vim:latest
 ```
 
 # Trabalhando com redes (networks) <a name="networks"></a>
+O principal objetivo e fazer um container se conectar com outro, existem 5 tipos de networks.
+- Bridge(ponte) - Quando cria uma network no docker o default é bridge
+- Host - Container compartilha a mesma network do docker host
+- Overlay - Vários containers em computadores e máquinas diferentes forma uma rede
+- Maclan
+- None
+
 
 #### criando uma rede
 ```console
@@ -232,4 +239,24 @@ docker network ls
 docker run -dit --name ubuntu1 --network minharede bash
 
 docker run -dit --name ubuntu2 --network minharede bash
+```
+
+#### Conectando um container em uma rede
+```console
+docker network connect minharede ubuntu3
+```
+
+#### Limpando as redes
+```console
+docker network prune
+```
+
+#### Verificando os detalhes da rede
+```console
+docker network inspect bridge
+```
+
+#### Verificando outros comandos de rede
+```console
+docker network
 ```
