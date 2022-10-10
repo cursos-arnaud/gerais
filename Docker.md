@@ -1,7 +1,9 @@
-- [Home](README.md)
-- [Execução de container](#execucao)
-- [Comandos Gerenciais](#gerencial)
-- [Criando uma imagem](#imagem)
+
+> ## Menu
+> - [Home](README.md)
+> - [Execução de container](#execucao)
+> - [Comandos Gerenciais](#gerencial)
+> - [Criando uma imagem](#imagem)
 
 # Execução de container <a name="execucao"></a>
 
@@ -60,7 +62,7 @@ docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html ngi
 docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
 
->  O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
+>  ### O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
 
 <br/><br/>
 
@@ -211,4 +213,23 @@ docker login
 #### Fazendo o push da imagem
 ```console
 docker push arnaudsa/nginx-com-vim:latest
+```
+
+# Trabalhando com redes (networks) <a name="networks"></a>
+
+#### criando uma rede
+```console
+docker network create --driver bridge minharede
+```
+
+####  listando as redes
+```console
+docker network ls
+```
+
+####  Utilizando a rede criada
+```console
+docker run -dit --name ubuntu1 --network minharede bash
+
+docker run -dit --name ubuntu2 --network minharede bash
 ```
