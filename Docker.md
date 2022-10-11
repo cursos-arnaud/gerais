@@ -11,56 +11,67 @@
 ```console
 docker run ubuntu
 ```
+<br/>
 
 #### Modo iterativo (-it) para acessar o bash do container
 ```console
 docker run -it ubuntu:latest bash
 ```
+<br/>
 
 #### Não atacha a tela
 ```console
 docker run -d ubuntu
 ```
+<br/>
 
 #### Define um nome para o container
 ```console
 docker run --name ubu ubuntu
 ```
+<br/>
 
 #### Expondo uma porta para acesso
 ```console
 docker run -p 8080:80 nginx
 ```
+<br/>
 
 #### Entrando no modo iterativo em um container em execução com o nome nginx no bash do container
 ```console
 docker exec -it nginx bash
 ```
+<br/>
 
 #### Compartilhando um volume
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
 ```
+<br/>
 
 #### Compartilhando um volume com mount
 ```console
 docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
+<br/>
 
 #### Criando um volume
 ```console
 docker volume create meuvolume
 ```
+<br/>
 
 #### Usano o volume criado "meuvolume" com o mount
 ```console
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
+<br/>
 
 #### Executando um container com todos os parâmetros acima
 ```console
 docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
+<br/>
 
 >  ### O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
 
@@ -71,58 +82,73 @@ docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/h
 ```console
 docker volume prune
 ```
+<br/>
 
 #### Listando os volume
 ```console
 docker volume ls
 ```
+<br/>
 
 ##### Verificando detalhes do volume
 ```console
 docker volume inspect meuvolume
 ```
+<br/>
 
 #### Executando um comando em um container para listar os arquivos
 ```console
 docker exec nginx ls
 ```
+<br/>
 
 #### Listando os processos docker
 ```console
 docker ps
 ```
+<br/>
 
 #### Listando os processos suspensos
 ```console
 docker ps -a
 ```
+<br/>
 
 #### Parando um container
 ```console
 docker stop 2222222
 ```
+<br/>
+
 #### Removendo um container
 ```console
 docker rm 2222222
 ```
+<br/>
 
 #### Forçando a remoção do container
 ```console
 docker rm 2222222 -f
 ```
+<br/>
 
 #### Removendo todos os containers ativos e inativos
 ```console
 docker rm $(docker ps -aq) -f
 ```
+<br/>
+
 #### Listando imagens
 ```console
 docker images 
 ```
+<br/>
+
 #### Removendo uma imagem
 ```console
 docker rmi nginx
 ```
+<br/>
 
 #### Verificando os logs
 ```console
@@ -130,7 +156,6 @@ docker log container_name
 
 docker logs -f --tail 1000 sample-app
 ```
-
 <br/><br/>
 
 # Criando uma imagem <a name="imagem"></a>
@@ -164,16 +189,20 @@ EXPOSE 80
 ```console
 FROM <image name>
 ```
+<br/>
+
 #### Executa um comando para atualizar os pacotes e instala o vim
 ```console
 RUN apt-get update && apt-get install vim -y
 ```
+<br/>
 
 #### Quebrando o comando run com \
 ```console
 RUN apt-get update && \
 	apt-get install vim -y
 ```
+<br/>
 
 #### Workdir diretório que você vai trabalhar dentro do container 
 Quando você começa a trabalhar no container ele vai criar uma pasta, 
@@ -181,37 +210,43 @@ e quando você entrar no container será direcionado para a pasta criada
 ```console
 WORKDIR /app
 ```
+<br/>
 
 #### Copia uma arquivo que está dentro do computador para dentro do container
 ```console
 COPY html/ /usr/share/nginx/html
 ```
+<br/>
 
 #### Executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
 ```console
 CMD ["echo", "Hello World"]
 ```
+<br/>
 
 #### É um comando fixo, diferente do CMD que é variável
 ```console
 ENTRYPOINT ["echo", "Hello"]
 ```
+<br/>
 
 #### Adiciona variável de ambiente
 ```console
 ENV xpto
 ```
+<br/>
 
 #### Expondo a porta 80
 ```console
 EXPOSE 80
 ```
-
+<br/>
 
 #### Faz o build da imagem
 ```console
 docker build -t arnaudsa/nginx-com-vim:latest .
 ```
+<br/>
 
 ### Publicando a imagem no docker hub
 
@@ -219,11 +254,13 @@ docker build -t arnaudsa/nginx-com-vim:latest .
 ```console
 docker login
 ```
+<br/>
 
 #### Fazendo o push da imagem
 ```console
 docker push arnaudsa/nginx-com-vim:latest
 ```
+<br/>
 
 # Trabalhando com redes (networks) <a name="networks"></a>
 O principal objetivo e fazer um container se conectar com outro, existem 5 tipos de networks.
@@ -238,11 +275,13 @@ O principal objetivo e fazer um container se conectar com outro, existem 5 tipos
 ```console
 docker network create --driver bridge minharede
 ```
+<br/>
 
 ####  Listando as redes
 ```console
 docker network ls
 ```
+<br/>
 
 ####  Utilizando a rede criada
 ```console
@@ -250,23 +289,28 @@ docker run -dit --name ubuntu1 --network minharede bash
 
 docker run -dit --name ubuntu2 --network minharede bash
 ```
+<br/>
 
 #### Conectando um container em uma rede
 ```console
 docker network connect minharede ubuntu3
 ```
+<br/>
 
 #### Limpando as redes
 ```console
 docker network prune
 ```
+<br/>
 
 #### Verificando os detalhes da rede
 ```console
 docker network inspect bridge
 ```
+<br/>
 
 #### Verificando outros comandos de rede
 ```console
 docker network
 ```
+<br/>
