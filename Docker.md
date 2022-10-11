@@ -175,8 +175,9 @@ RUN apt-get update && \
 	apt-get install vim -y
 ```
 
-#### Workdir diretório que você vai trabalhar dentro do container, quando você começa a trabalhar no container ele vai criar uma pasta 
-e quando você entrar no container será direcionado para esta pasta
+#### Workdir diretório que você vai trabalhar dentro do container 
+Quando você começa a trabalhar no container ele vai criar uma pasta, 
+e quando você entrar no container será direcionado para a pasta criada
 ```console
 WORKDIR /app
 ```
