@@ -7,52 +7,52 @@
 
 # Execução de container <a name="execucao"></a>
 
-#### executar um container
+#### Executar um container
 ```console
 docker run ubuntu
 ```
 
-#### modo iterativo (-it) para acessar o bash do container
+#### Modo iterativo (-it) para acessar o bash do container
 ```console
 docker run -it ubuntu:latest bash
 ```
 
-#### não atacha a tela
+#### Não atacha a tela
 ```console
 docker run -d ubuntu
 ```
 
-#### define um nome para o container
+#### Define um nome para o container
 ```console
 docker run --name ubu ubuntu
 ```
 
-#### expondo uma porta para acesso
+#### Expondo uma porta para acesso
 ```console
 docker run -p 8080:80 nginx
 ```
 
-#### entrando no modo iterativo em um container em execução com o nome nginx no bash do container
+#### Entrando no modo iterativo em um container em execução com o nome nginx no bash do container
 ```console
 docker exec -it nginx bash
 ```
 
-#### compartilhando um volume
+#### Compartilhando um volume
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
 ```
 
-#### compartilhando um volume com mount
+#### Compartilhando um volume com mount
 ```console
 docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
 
-#### criando um volume
+#### Criando um volume
 ```console
 docker volume create meuvolume
 ```
 
-#### usano o volume criado "meuvolume" com o mount
+#### Usano o volume criado "meuvolume" com o mount
 ```console
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
@@ -67,17 +67,17 @@ docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/h
 <br/><br/>
 
 # Comandos Gerenciais <a name="gerencial"></a>
-#### limpando os volumes de um container
+#### Limpando os volumes de um container
 ```console
 docker volume prune
 ```
 
-#### listando os volume
+#### Listando os volume
 ```console
 docker volume ls
 ```
 
-##### verificando detalhes do volume
+##### Verificando detalhes do volume
 ```console
 docker volume inspect meuvolume
 ```
@@ -87,42 +87,50 @@ docker volume inspect meuvolume
 docker exec nginx ls
 ```
 
-#### listando os processos docker
+#### Listando os processos docker
 ```console
 docker ps
 ```
 
-#### listando os processos suspensos
+#### Listando os processos suspensos
 ```console
 docker ps -a
 ```
 
-#### parando um container
+#### Parando um container
 ```console
 docker stop 2222222
 ```
-#### removendo um container
+#### Removendo um container
 ```console
 docker rm 2222222
 ```
 
-#### forçando a remoção do container
+#### Forçando a remoção do container
 ```console
 docker rm 2222222 -f
 ```
 
-#### removendo todos os containers ativos e inativos
+#### Removendo todos os containers ativos e inativos
 ```console
 docker rm $(docker ps -aq) -f
 ```
-#### listando imagens
+#### Listando imagens
 ```console
 docker images 
 ```
-#### removendo uma imagem
+#### Removendo uma imagem
 ```console
 docker rmi nginx
 ```
+
+#### Verificando os logs
+```console
+docker log container_name
+
+docker logs -f --tail 1000 sample-app
+```
+
 <br/><br/>
 
 # Criando uma imagem <a name="imagem"></a>
@@ -130,6 +138,7 @@ docker rmi nginx
 #### Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar uma imagem
 
 Exemplo de Dockerfile
+
 ```console
 FROM nginx:latest
 
@@ -224,12 +233,12 @@ O principal objetivo e fazer um container se conectar com outro, existem 5 tipos
 - None
 
 
-#### criando uma rede
+#### Criando uma rede
 ```console
 docker network create --driver bridge minharede
 ```
 
-####  listando as redes
+####  Listando as redes
 ```console
 docker network ls
 ```
