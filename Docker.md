@@ -5,53 +5,41 @@
 >
 > - [Home](README.md)
 > - [Executando](#executando)
+> - [Volumes](#volumes)
 > - [Gerenciando container](#gerenciando-container)
-> - [Criando uma imagem](#imagem)
+> - [Trabalhando com imagens](#trabalhando-com-imagens)
 > - [Networks](#networks)
 
 ### Executando
 
-#### Executando um container com todos os parâmetros acima
+#### Executando um container
 
 ```console
 docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/ngi
 ```
 
-#### Executar um container
+##### Detalhando os parametros
 
-```console
-docker run ubuntu
-```
-
-#### Modo iterativo (-it) para acessar o bash do container
+- [ -d ] executa o container sem atachar o console
+- [ -p 8080:80 ] aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
+- [ --name nginx ] aqui definimos um nome para o container, isso facilita o gerenciamento do container
+- [ -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/ngi] estamos compartilhando um volume do host com o container
+  
+### Executando um container em modo iterativo (-it) e acessando o bash
 
 ```console
 docker run -it ubuntu:latest bash
 ```
 
-#### Não atacha a tela
-
-```console
-docker run -d ubuntu
-```
-
-#### Define um nome para o container
-
-```console
-docker run --name ubu ubuntu
-```
-
-#### Expondo uma porta para acesso
-
-```console
-docker run -p 8080:80 nginx
-```
-
-#### Entrando no modo iterativo em um container em execução com o nome nginx no bash do container
+#### Entrando no modo iterativo de um container em execução, o nome do container é nginx
 
 ```console
 docker exec -it nginx bash
 ```
+
+---
+
+## Volumes
 
 #### Compartilhando um volume
 
@@ -169,7 +157,9 @@ docker log container_name
 docker logs -f --tail 1000 sample-app
 ```
 
-# Criando uma imagem <a name="imagem"></a>
+---
+
+## Trabalhando com imagens
 
 #### Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar uma imagem
 
@@ -229,8 +219,6 @@ WORKDIR /app
 COPY html/ /usr/share/nginx/html
 ```
 
-<br >
-
 #### Executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
 
 ```console
@@ -275,7 +263,9 @@ docker login
 docker push arnaudsa/nginx-com-vim:latest
 ```
 
-# Trabalhando com redes (networks) <a name="networks"></a>
+---
+
+## Networks
 
 O principal objetivo e fazer um container se conectar com outro, existem 5 tipos de networks.
 
