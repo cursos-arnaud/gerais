@@ -25,7 +25,7 @@ docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/h
 - [ --name nginx ] aqui definimos um nome para o container, isso facilita o gerenciamento do container
 - [ -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/ngi] estamos compartilhando um volume do host com o container
   
-### Executando um container em modo iterativo (-it) e acessando o bash
+#### Executando um container em modo iterativo (-it) e acessando o bash
 
 ```console
 docker run -it ubuntu:latest bash
@@ -41,7 +41,7 @@ docker exec -it nginx bash
 
 ## Volumes
 
-#### Compartilhando um volume
+### Compartilhando um volume
 
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
