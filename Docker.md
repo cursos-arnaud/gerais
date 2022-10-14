@@ -93,7 +93,7 @@ docker exec nginx ls
 
 ### Volumes
 
-Os volumes servem para compartilhar dados entre o host e o container, para fazer esse compartilhamento podemos usar o [ --mount ] ou [ -v ]. Temos alguns pontos importantes na utilização dos comandos, com -v quando não existe uma pasta ele cria a pasta, com mount ele da erro.
+Os volumes servem para compartilhar dados entre o host e o container, para fazer esse compartilhamento podemos usar o `--mount`  ou `-v`. Temos alguns pontos importantes na utilização dos comandos, com -v quando não existe uma pasta ele cria a pasta, com mount ele da erro.
 
 #### Criando um volume
 
