@@ -78,7 +78,7 @@ docker rm $(docker ps -aq) -f
 ```console
 docker log container_name
 
-docker logs -f --tail 1000 sample-app
+docker logs -f --tail 1000 nginx
 ```
 
 ### Listando os arquivos em um container
@@ -139,7 +139,7 @@ docker volume inspect meuvolume
 docker volume prune
 ```
 
-> #### O mapeamento com -v quando colocamos uma pasta que não existe ele cria a pasta automaticamente com mount ele da erro
+> ####  **Importante:** O mapeamento com -v quando colocamos uma pasta que não existe ele cria a pasta automaticamente com mount ele da erro
 
 ---
 
@@ -167,64 +167,28 @@ ENV xpto
 EXPOSE 80
 ```
 
-### Descrevendo comandos do Dockerfile
+#### Detalhando o Dockerfile
 
-#### Cria uma imagem a partir de uma imagem base
+- [ FROM nginx:latest ] cria uma image a partir de uma imagem base
+- [ WORKDIR /app ] criar uma pasta dentro do container e quando entramos no bash do container seremos direcionado para esta pasta
+- [ RUN apt-get update && apt-get install vim -y ] executa um comando para atualizar os pacotes e instala o vim
+- [ COPY html/ /usr/share/nginx/html ] copia um diretório para dentro do container
+- [ CMD ["echo", "Hello World"] ] executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
+- [ CMD ENTRYPOINT ["echo", "Hello World"] ] é um comando fixo, diferente do CMD que é variável
+- [ ENV xpto ] atribui um valor para a variável de ambiente
+- [ EXPOSE 80 ] expoe a porta 80 do container
 
-```console
-FROM <image name>
-```
-
-#### Executa um comando para atualizar os pacotes e instala o vim
-
-```console
-RUN apt-get update && apt-get install vim -y
-```
-
-#### Quebrando o comando run com \
+> ### Para uma melhor legibilidade podemos quebrar o comando run com uma barra ( \ )
 
 ```console
 RUN apt-get update && \
  apt-get install vim -y
 ```
 
-#### Workdir diretório que você vai trabalhar dentro do container
-
-Quando você começa a trabalhar no container ele vai criar uma pasta,
-e quando você entrar no container será direcionado para a pasta criada
+### Para realizar o build da imagem devemos executar o comando no mesmo diretório do Dockerfile, nele informamos o usuário do docker hub, nome da imagem e a versão
 
 ```console
-WORKDIR /app
-```
-
-#### Copia uma arquivo que está dentro do computador para dentro do container
-
-```console
-COPY html/ /usr/share/nginx/html
-```
-
-#### Executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
-
-```console
-CMD ["echo", "Hello World"]
-```
-
-#### É um comando fixo, diferente do CMD que é variável
-
-```console
-ENTRYPOINT ["echo", "Hello"]
-```
-
-#### Adiciona variável de ambiente
-
-```console
-ENV xpto
-```
-
-#### Expondo a porta 80
-
-```console
-EXPOSE 80
+docker build -t arnaudsa/nginx-com-vim:latest .
 ```
 
 ### Listando imagens
@@ -233,31 +197,28 @@ EXPOSE 80
 docker images 
 ```
 
-#### Removendo uma imagem
+### Removendo uma imagem
 
 ```console
 docker rmi nginx
 ```
 
-#### Faz o build da imagem
+### Removendo todas as imagens
 
 ```console
-docker build -t arnaudsa/nginx-com-vim:latest .
+docker image prune -a
 ```
 
 ### Publicando a imagem no docker hub
 
-#### Fazer login no docker hub
-
 ```console
 docker login
-```
 
-#### Fazendo o push da imagem
-
-```console
 docker push arnaudsa/nginx-com-vim:latest
 ```
+
+- [ docker login ] faz o login do docker hub
+- [ docker push arnaudsa/nginx-com-vim:latest ] envia a imagem para o docker hub
 
 ---
 
@@ -271,45 +232,45 @@ O principal objetivo e fazer um container se conectar com outro, existem 5 tipos
 - Maclan
 - None
 
-#### Criando uma rede
+### Criando um network
 
 ```console
 docker network create --driver bridge minharede
 ```
 
-#### Listando as redes
+### Listando as redes
 
 ```console
 docker network ls
 ```
 
-#### Utilizando a rede criada
+### Utilizando a rede criada
 
 ```console
-docker run -dit --name ubuntu1 --network minharede bash
+docker run -d -it --name ubuntu1 --network minharede bash
 
-docker run -dit --name ubuntu2 --network minharede bash
+docker run -d -it --name ubuntu2 --network minharede bash
 ```
 
-#### Conectando um container em uma rede
+### Conectando um container em uma rede
 
 ```console
 docker network connect minharede ubuntu3
 ```
 
-#### Limpando as redes
+### Limpando as redes
 
 ```console
 docker network prune
 ```
 
-#### Verificando os detalhes da rede
+### Verificando os detalhes da rede
 
 ```console
 docker network inspect minharede
 ```
 
-#### Verificando outros comandos de rede
+### Verificando outros comandos de rede
 
 ```console
 docker network
