@@ -12,7 +12,6 @@
 > - [Compose](#compose)
 > - [Dependência entre containers](#dependência-entre-containers)
 
-https://github.com/jwilder/dockerize
 ---
 
 ### Containers
