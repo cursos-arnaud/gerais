@@ -351,4 +351,6 @@ services:
 
 ### Iniciando e fazendo o build dos containers
 
-`docker-compose up -d --build`
+```console 
+docker-compose up -d --build
+```
