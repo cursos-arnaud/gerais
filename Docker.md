@@ -147,9 +147,9 @@ docker volume prune
 
 ### Imagens
 
-#### Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar uma imagem
+### Criando o Dockerfile
 
-Exemplo de Dockerfile
+Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar sua imagem
 
 ```console
 FROM nginx:latest
