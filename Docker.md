@@ -8,6 +8,7 @@
 > - [Volumes](#volumes)
 > - [Imagens](#imagens)
 > - [Networks](#networks)
+> - [Compose](#compose)
 
 ---
 
@@ -275,3 +276,79 @@ docker network inspect minharede
 ```console
 docker network
 ```
+
+---
+
+### Compose
+
+#### Quando precisamos trabalhar com vários containers fica inviável termos que ficar digitando vários comandos docker run para inicializar os containers, o docker-compose chegou para resolver esse problema, com ele podemos descrever todos os containers que teremos na aplicação, e a partir de um único comando, subir todos eles, abaixo temos um exemplo de um arquivo docker-compose.yaml
+
+```console
+version: '3'
+
+networks:
+  gatonet:
+    driver: bridge
+    name: gatonet
+
+volumes:
+  postgres-data:
+    name: postgres-data
+
+services:
+  app:
+    build:
+      context: ./
+    image: arnaudsa/sample-app-dev
+    container_name: app
+    ports:
+      - "3000:3000"
+    networks: 
+      - gatonet
+    depends_on:
+      - db
+  nginx:
+    image: nginx:1.23.0
+    container_name: nginx
+    tty: true
+    restart: always
+    networks:
+      - gatonet
+    ports:
+      - 8080:80  
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app  
+  db:
+    image: postgres:13-alpine
+    container_name: db
+    restart: always
+    tty: true
+    networks:
+      - gatonet
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_DB=sampledb
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    networks:
+      - gatonet
+    depends_on:
+      - db
+    ports:
+      - 8181:8080
+
+```
+
+### Iniciando e fazendo o build dos containers
+
+`docker-compose up -d --build`
