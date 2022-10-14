@@ -14,7 +14,7 @@
 #### Executando um container
 
 ```console
-docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/ngi
+docker run -d -p 8080:80 --name nginx nginx:latest
 ```
 
 ##### Detalhando os parametros
@@ -22,7 +22,6 @@ docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/h
 - [ -d ] executa o container sem atachar o console
 - [ -p 8080:80 ] aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
 - [ --name nginx ] aqui definimos um nome para o container, isso facilita o gerenciamento do container
-- [ -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/ngi] estamos compartilhando um volume do host com o container
   
 #### Executando um container em modo iterativo (-it) e acessando o bash
 
@@ -88,12 +87,36 @@ docker exec nginx ls
 
 ---
 
-## Gerenciando container
+### Volumes
 
-#### Limpando os volumes de um container
+#### Criando um volume
 
 ```console
-docker volume prune
+docker volume create meuvolume
+```
+
+#### Usano o volume criado (meuvolume) com o mount
+
+```console
+docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
+```
+
+### Compartilhando um volume com volume ( -v )
+
+```console
+docker run -v meuvolume:/usr/share/nginx/html nginx
+```
+
+### Compartilhando um diretório com volume ( -v source:target )
+
+```console
+docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
+```
+
+#### Compartilhando um diretório com mount
+
+```console
+docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
 
 #### Listando os volume
@@ -108,7 +131,19 @@ docker volume ls
 docker volume inspect meuvolume
 ```
 
-#### Listando imagens
+#### Limpando os volumes de um container
+
+```console
+docker volume prune
+```
+
+>#### O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
+
+---
+
+## Gerenciando container
+
+### Listando imagens
 
 ```console
 docker images 
@@ -119,42 +154,6 @@ docker images
 ```console
 docker rmi nginx
 ```
-
----
-
-## Volumes
-
-### Compartilhando um volume
-
-```console
-docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
-```
-
-#### Compartilhando um volume com mount
-
-```console
-docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
-```
-
-#### Criando um volume
-
-```console
-docker volume create meuvolume
-```
-
-#### Usano o volume criado "meuvolume" com o mount
-
-```console
-docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
-```
-
-#### Executando um container com todos os parâmetros acima
-
-```console
-docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
-```
-
->## O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
 
 ---
 
