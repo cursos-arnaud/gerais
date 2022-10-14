@@ -281,7 +281,9 @@ docker network
 
 ### Compose
 
-#### Quando precisamos trabalhar com vários containers fica inviável termos que ficar digitando vários comandos docker run para inicializar os containers, o docker-compose chegou para resolver esse problema, com ele podemos descrever todos os containers que teremos na aplicação, e a partir de um único comando, subir todos eles, abaixo temos um exemplo de um arquivo docker-compose.yaml
+#### Exemplo docker-compose.yaml
+
+Quando precisamos trabalhar com vários containers fica inviável termos que ficar digitando vários comandos para inicializar os containers, o docker-compose chegou para resolver esse problema, com ele podemos descrever todos os containers que teremos na aplicação, e a partir de um único comando subir todos os containers.
 
 ```console
 version: '3'
@@ -351,6 +353,6 @@ services:
 
 ### Iniciando e fazendo o build dos containers
 
-```console 
+```console
 docker-compose up -d --build
 ```
