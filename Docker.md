@@ -9,6 +9,8 @@
 > - [Trabalhando com imagens](#trabalhando-com-imagens)
 > - [Networks](#networks)
 
+---
+
 ### Containers
 
 #### Executando um container
