@@ -226,6 +226,10 @@ docker push arnaudsa/nginx-com-vim:latest
 
 ### Otimizando imagens
 
+Sempre que vamos trabalhar com imagens é interessante termos uma imagem enxuta, com isso temos mais segurança pois quanto menos pacotes instalados mais seguros estamos, outro ponto interessante e a performance pois com uma imagem menor vou conseguir iniciar minha aplicação mais rapidamente.
+
+Quem nos possibilita essa otimização das imagens é o **Multistage Building,** ele permite fazer o processo de build em 2 ou mais etapas, abaixo temos um exemplo de um Dockerfile utilizando o Multistage Building, nossa imagem padrão tinha 300MB e conseguimos deixar ela com 5MB.
+
 ```console
 FROM golang:1.19.2-alpine3.16 as builder
 
