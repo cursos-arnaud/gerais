@@ -10,7 +10,9 @@
 > - [Otimizando imagens](#otimizando-imagens)
 > - [Networks](#networks)
 > - [Compose](#compose)
+> - [Dependência entre containers](#dependência-entre-containers)
 
+https://github.com/jwilder/dockerize
 ---
 
 ### Containers
@@ -392,4 +394,73 @@ docker-compose up -d
 
 ```console
 docker-compose ps
+```
+
+### Dependência entre containers
+
+Existem situações em que um container tem dependência de outro container, exemplo o container do app depende do container de banco de dados, se o container do app inicializar antes do container de banco de dados teremos uma falha na inicialização do container, para resolver esses problemas podemos utilizar o [dokerize](https://github.com/jwilder/dockerize)
+
+docker-compose.yaml
+
+```console
+version: '3'
+
+networks:
+  gatonet:
+    driver: bridge
+    name: gatonet
+
+volumes:
+  postgres-data:
+    name: postgres-data
+
+services:
+  app:
+    build:
+      context: ./
+    image: arnaudsa/sample-app-dev
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 30s node app.js
+    container_name: app
+    ports:
+      - "3000:3000"
+    networks: 
+      - gatonet
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    container_name: db
+    restart: always
+    tty: true
+    networks:
+      - gatonet
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_DB=sampledb
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+```
+
+Dockerfile
+
+```console
+FROM node:18.10-alpine3.15
+
+WORKDIR /app
+
+COPY . .
+RUN npm install
+
+RUN apk add --no-cache openssl
+
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+EXPOSE 3000
 ```
