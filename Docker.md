@@ -11,69 +11,69 @@
 
 ---
 
-### Containers
+## Containers
 
-#### Executando um container
+### Executando um container
 
 ```console
 docker run -d -p 8080:80 --name nginx nginx:latest
 ```
 
-##### Detalhando os parametros
+#### Detalhando os parametros
 
 - [ -d ] executa o container sem atachar o console
 - [ -p 8080:80 ] aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
 - [ --name nginx ] aqui definimos um nome para o container, isso facilita o gerenciamento do container
   
-#### Executando um container em modo iterativo (-it) e acessando o bash
+### Executando um container em modo iterativo (-it) e acessando o bash
 
 ```console
 docker run -it ubuntu:latest bash
 ```
 
-#### Entrando no modo iterativo de um container em execução, o nome do container é nginx
+### Entrando no modo iterativo de um container em execução, o nome do container é nginx
 
 ```console
 docker exec -it nginx bash
 ```
 
-#### Listando os containers em execução
+### Listando os containers em execução
 
 ```console
 docker ps
 ```
 
-#### Listando os containers suspensos
+### Listando os containers suspensos
 
 ```console
 docker ps -a
 ```
 
-#### Parando um container
+### Parando um container
 
 ```console
 docker stop nginx
 ```
 
-#### Removendo um container
+### Removendo um container
 
 ```console
 docker rm nginx
 ```
 
-#### Forçando a remoção do container
+### Forçando a remoção do container
 
 ```console
 docker rm nginx -f
 ```
 
-#### Removendo todos os containers ativos e inativos
+### Removendo todos os containers ativos e inativos
 
 ```console
 docker rm $(docker ps -aq) -f
 ```
 
-#### Verificando os logs
+### Verificando os logs
 
 ```console
 docker log container_name
@@ -81,7 +81,7 @@ docker log container_name
 docker logs -f --tail 1000 sample-app
 ```
 
-#### Listando os arquivos em um container
+### Listando os arquivos em um container
 
 ```console
 docker exec nginx ls
@@ -89,79 +89,63 @@ docker exec nginx ls
 
 ---
 
-### Volumes
+## Volumes
 
-#### Criando um volume
+### Criando um volume
 
 ```console
 docker volume create meuvolume
 ```
 
-#### Usano o volume criado (meuvolume) com o mount
+### Usano o volume criado (meuvolume) com o mount
 
 ```console
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
 
-#### Compartilhando um volume com volume ( -v )
+### Compartilhando um volume com volume ( -v )
 
 ```console
 docker run -v meuvolume:/usr/share/nginx/html nginx
 ```
 
-#### Compartilhando um diretório com volume ( -v source:target )
+### Compartilhando um diretório com volume ( -v source:target )
 
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
 ```
 
-#### Compartilhando um diretório com mount
+### Compartilhando um diretório com mount
 
 ```console
 docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx/html nginx
 ```
 
-#### Listando os volume
+### Listando os volume
 
 ```console
 docker volume ls
 ```
 
-#### Verificando detalhes do volume
+### Verificando detalhes do volume
 
 ```console
 docker volume inspect meuvolume
 ```
 
-#### Limpando os volumes de um container
+### Limpando os volumes de um container
 
 ```console
 docker volume prune
 ```
 
->#### O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
-
----
-
-## Gerenciando container
-
-### Listando imagens
-
-```console
-docker images 
-```
-
-#### Removendo uma imagem
-
-```console
-docker rmi nginx
-```
+> #### O mapeamento com -v quando colocamos uma pasta que não existe ele cria a pasta automaticamente com mount ele da erro
 
 ---
 
 ## Trabalhando com imagens
 
-#### Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar uma imagem
+### Para criar uma imagem personalizada devemos começar criando um arquivo Dockerfile, ele basicamente é uma receita de bolo para criar uma imagem
 
 Exemplo de Dockerfile
 
@@ -241,6 +225,18 @@ ENV xpto
 
 ```console
 EXPOSE 80
+```
+
+### Listando imagens
+
+```console
+docker images 
+```
+
+#### Removendo uma imagem
+
+```console
+docker rmi nginx
 ```
 
 #### Faz o build da imagem
