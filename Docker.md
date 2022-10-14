@@ -27,7 +27,7 @@ docker run -d -p 8080:80 --name nginx nginx:latest
 - ` -p 8080:80 ` aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
 - ` --name nginx ` aqui definimos um nome para o container, isso facilita o gerenciamento do container
   
-#### Executando um container em modo iterativo (-it) e acessando o bash
+#### Executando um container em modo iterativo `-it` e acessando o bash
 
 ```console
 docker run -it ubuntu:latest bash
@@ -107,13 +107,13 @@ docker volume create meuvolume
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
 
-#### Compartilhando um volume com volume ( -v )
+#### Compartilhando um volume com volume ` -v `
 
 ```console
 docker run -v meuvolume:/usr/share/nginx/html nginx
 ```
 
-#### Compartilhando um diretório com volume ( -v source:target )
+#### Compartilhando um diretório com volume ` -v source:target `
 
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
