@@ -103,13 +103,13 @@ docker volume create meuvolume
 docker run --mount type=volume,source=meuvolume,target=/usr/share/nginx/html nginx
 ```
 
-### Compartilhando um volume com volume ( -v )
+#### Compartilhando um volume com volume ( -v )
 
 ```console
 docker run -v meuvolume:/usr/share/nginx/html nginx
 ```
 
-### Compartilhando um diretório com volume ( -v source:target )
+#### Compartilhando um diretório com volume ( -v source:target )
 
 ```console
 docker run -v /Users/cora/Dev/html:/usr/share/nginx/html nginx
@@ -127,7 +127,7 @@ docker run --mount type=bind,source=/Users/cora/Dev/html,target=/usr/share/nginx
 docker volume ls
 ```
 
-##### Verificando detalhes do volume
+#### Verificando detalhes do volume
 
 ```console
 docker volume inspect meuvolume
