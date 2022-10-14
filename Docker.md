@@ -23,9 +23,9 @@ docker run -d -p 8080:80 --name nginx nginx:latest
 
 #### Detalhando os parametros
 
-- [ -d ] executa o container sem atachar o console
-- [ -p 8080:80 ] aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
-- [ --name nginx ] aqui definimos um nome para o container, isso facilita o gerenciamento do container
+- ` -d ` executa o container sem atachar o console
+- ` -p 8080:80 ` aqui estamos mapeando a porta 8080 do host com a porta 80 do container, com isso conseguimos acessar o nginx através do nosso host.
+- ` --name nginx ` aqui definimos um nome para o container, isso facilita o gerenciamento do container
   
 #### Executando um container em modo iterativo (-it) e acessando o bash
 
@@ -171,16 +171,16 @@ EXPOSE 80
 
 #### Detalhando o Dockerfile
 
-- [ FROM nginx:latest ] cria uma image a partir de uma imagem base
-- [ WORKDIR /app ] criar uma pasta dentro do container e quando entramos no bash do container seremos direcionado para esta pasta
-- [ RUN apt-get update && apt-get install vim -y ] executa um comando para atualizar os pacotes e instala o vim
-- [ COPY html/ /usr/share/nginx/html ] copia um diretório para dentro do container
-- [ CMD ["echo", "Hello World"] ] executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
-- [ CMD ENTRYPOINT ["echo", "Hello World"] ] é um comando fixo, diferente do CMD que é variável
-- [ ENV xpto ] atribui um valor para a variável de ambiente
-- [ EXPOSE 80 ] expoe a porta 80 do container
+- ` FROM nginx:latest ` cria uma image a partir de uma imagem base
+- ` WORKDIR /app ` criar uma pasta dentro do container e quando entramos no bash do container seremos direcionado para esta pasta
+- ` RUN apt-get update && apt-get install vim -y ` executa um comando para atualizar os pacotes e instala o vim
+- ` COPY html/ /usr/share/nginx/html ` copia um diretório para dentro do container
+- ` CMD ["echo", "Hello World"] ` executa um comando no container, o comando pode ser substituido em tempo de execução (no docker run)
+- ` CMD ENTRYPOINT ["echo", "Hello World"] ` é um comando fixo, diferente do CMD que é variável
+- ` ENV xpto ` atribui um valor para a variável de ambiente
+- ` EXPOSE 80 ` expoe a porta 80 do container
 
-> #### Para uma melhor legibilidade podemos quebrar o comando run com uma barra ( \ )
+> #### Para uma melhor legibilidade podemos quebrar o comando run com uma barra  `\`
 
 ```console
 RUN apt-get update && \
@@ -219,8 +219,8 @@ docker login
 docker push arnaudsa/nginx-com-vim:latest
 ```
 
-- [ docker login ] faz o login do docker hub
-- [ docker push arnaudsa/nginx-com-vim:latest ] envia a imagem para o docker hub
+- ` docker login ` faz o login do docker hub
+- ` docker push arnaudsa/nginx-com-vim:latest ` envia a imagem para o docker hub
 
 ---
 
