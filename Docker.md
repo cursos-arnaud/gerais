@@ -180,7 +180,7 @@ EXPOSE 80
 - [ ENV xpto ] atribui um valor para a variável de ambiente
 - [ EXPOSE 80 ] expoe a porta 80 do container
 
-> ### Para uma melhor legibilidade podemos quebrar o comando run com uma barra ( \ )
+> #### Para uma melhor legibilidade podemos quebrar o comando run com uma barra ( \ )
 
 ```console
 RUN apt-get update && \
