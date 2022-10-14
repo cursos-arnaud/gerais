@@ -4,13 +4,12 @@
 >
 >
 > - [Home](README.md)
-> - [Executando](#executando)
+> - [Containers](#containers)
 > - [Volumes](#volumes)
-> - [Gerenciando container](#gerenciando-container)
 > - [Trabalhando com imagens](#trabalhando-com-imagens)
 > - [Networks](#networks)
 
-### Executando
+### Containers
 
 #### Executando um container
 
@@ -35,6 +34,90 @@ docker run -it ubuntu:latest bash
 
 ```console
 docker exec -it nginx bash
+```
+
+#### Listando os containers em execução
+
+```console
+docker ps
+```
+
+#### Listando os containers suspensos
+
+```console
+docker ps -a
+```
+
+#### Parando um container
+
+```console
+docker stop nginx
+```
+
+#### Removendo um container
+
+```console
+docker rm nginx
+```
+
+#### Forçando a remoção do container
+
+```console
+docker rm nginx -f
+```
+
+#### Removendo todos os containers ativos e inativos
+
+```console
+docker rm $(docker ps -aq) -f
+```
+
+#### Verificando os logs
+
+```console
+docker log container_name
+
+docker logs -f --tail 1000 sample-app
+```
+
+#### Listando os arquivos em um container
+
+```console
+docker exec nginx ls
+```
+
+---
+
+## Gerenciando container
+
+#### Limpando os volumes de um container
+
+```console
+docker volume prune
+```
+
+#### Listando os volume
+
+```console
+docker volume ls
+```
+
+##### Verificando detalhes do volume
+
+```console
+docker volume inspect meuvolume
+```
+
+#### Listando imagens
+
+```console
+docker images 
+```
+
+#### Removendo uma imagem
+
+```console
+docker rmi nginx
 ```
 
 ---
@@ -72,90 +155,6 @@ docker run -d -p 8080:80 --name nginx -mounts type=bind,source=/Users/cora/Dev/h
 ```
 
 >## O mapeamento com -v quando colocamos uma pasta que não existe ele vai criar uma automaticamente com mount isso não ocorre ele da erro
-
----
-
-## Gerenciando container
-
-#### Limpando os volumes de um container
-
-```console
-docker volume prune
-```
-
-#### Listando os volume
-
-```console
-docker volume ls
-```
-
-##### Verificando detalhes do volume
-
-```console
-docker volume inspect meuvolume
-```
-
-#### Executando um comando em um container para listar os arquivos
-
-```console
-docker exec nginx ls
-```
-
-#### Listando os processos docker
-
-```console
-docker ps
-```
-
-#### Listando os processos suspensos
-
-```console
-docker ps -a
-```
-
-#### Parando um container
-
-```console
-docker stop 2222222
-```
-
-#### Removendo um container
-
-```console
-docker rm 2222222
-```
-
-#### Forçando a remoção do container
-
-```console
-docker rm 2222222 -f
-```
-
-#### Removendo todos os containers ativos e inativos
-
-```console
-docker rm $(docker ps -aq) -f
-```
-
-#### Listando imagens
-
-```console
-docker images 
-```
-
-#### Removendo uma imagem
-
-```console
-docker rmi nginx
-```
-
-#### Verificando os logs
-
-```console
-docker log container_name
-
-docker logs -f --tail 1000 sample-app
-```
 
 ---
 
