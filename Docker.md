@@ -317,7 +317,7 @@ version: '3.4'
 networks:
   gatonet:
     driver: bridge
-    name: gatonet
+      name: gatonet
 
 volumes:
   postgres-data:
