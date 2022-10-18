@@ -312,12 +312,12 @@ docker network
 Quando precisamos trabalhar com vários containers fica inviável termos que ficar digitando vários comandos para inicializar os containers, o docker-compose chegou para resolver esse problema, com ele podemos descrever todos os containers que teremos na aplicação, e a partir de um único comando subir todos os containers.
 
 ```console
-version: '3.4'
+version: '3.9'
 
 networks:
   gatonet:
     driver: bridge
-      name: gatonet
+    name: gatonet
 
 volumes:
   postgres-data:
