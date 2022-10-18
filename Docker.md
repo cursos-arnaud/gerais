@@ -317,11 +317,9 @@ version: '3'
 networks:
   gatonet:
     driver: bridge
-    name: gatonet
 
 volumes:
   postgres-data:
-    name: postgres-data
 
 services:
   app:
