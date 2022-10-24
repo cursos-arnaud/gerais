@@ -208,7 +208,7 @@ Para obrigar que nossos PRs tenha um revisor devemos selecionar o menu settings,
 
 ![settings](images/pr-require-revisor.png)
 
-#### **Codeowners**
+#### **Code owners**
 
 Codeowners é uma maneira de atribuirmos automaticamente a revisão do PR para pessoas donas do código, nele podemos definir os donos do código por tipo de arquivo, diretório, grupo de trabalho para configurar os owners do código devemos criar uma arquivo chamado CODEOWNERS.md dentro da pasta .github
 
@@ -223,3 +223,25 @@ Aqui temos um exemplo simples de um arquivo CODEOWNERS
 Podemos fazer uma configuração em nossa rule para que na revisão do PR seja requerido um code owner.
 
 ![required code owners](images/pr-required-code-owner.png)
+
+#### **Sem ver - Semantical Versioning**
+
+A ideia por tras do sem ver e nos ajudar como geramos nossas versões de apis e libs, quando estamos falando de semantical versioning temos 3 elementos importantes **MAJOR, MINOR, PATCH**
+
+Vamos supor que temos uma versão 2.1.4
+
+- (2) Major - API pública
+- (1) Minor - Adicionado novas funcionalidades, mas compatível com a API
+- (4) Patch - Bugs, ajustes
+
+Para mais detalhes podemos acessar a [página](https://semver.org/lang/pt-BR/) do sem ver
+
+#### **Conventional commits**
+
+A especificação do [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/#resumo) é uma convenção simples para utilizar nas mensagens de commit. Ela define um conjunto de regras para criar um histórico de commit explícito, o que facilita a criação de ferramentas automatizadas baseadas na especificação. Esta convenção se encaixa com o SemVer, descrevendo os recursos, correções e modificações que quebram a compatibilidade nas mensagens de commit.
+
+**Commitlint** é uma ferramenta nodejs que nos ajuda a verificar se estamos seguindo o padrão correto de nomenclatura.Para mais detalhes [consulte](https://commitlint.js.org/#/)
+
+**Commitsar** é outra ferramenta que nos ajuda a verificar se estamos seguindo o padrão correto de nomenclatura, o bom dessa ferramenta é que não precisamos instalar nada pois ele roda no docker. Para mais detalhes [consulte](https://commitsar.aevea.ee/)
+
+**Commitizen** é outra ferramenta que nos ajuda a verificar se estamos seguindo o padrão correto de nomenclatura, diferente das outras ela utiliza linha de comando[consulte](https://github.com/commitizen/cz-cli)
