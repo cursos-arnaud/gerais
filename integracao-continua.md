@@ -62,7 +62,7 @@ Para aprendermos como criar um processo CI, vamos criar uma pequena aplicação 
 
 Depois de adicionado o projeto no repositório vamos criar nosso workflow, crie o arquivo .github/workflows/ci.yaml
 
-```json
+```console
 name: ci-golang-workflow
 on: [push]    
 jobs:
@@ -89,7 +89,7 @@ jobs:
 - `run: go test` - executamos os testes unitários do app
 - `run: go run math.go` - aqui colocamos o app para rodar
 
-
+Workflows
 ![actions](images/actions-detail.png)
 
 Detalhe do workflow
