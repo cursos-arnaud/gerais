@@ -4,6 +4,6 @@
 >
 > - [Docker](Docker.md)
 > - [Git](Git.md)
-> - [Integração Continua](Docker.md)
+> - [Integração Continua](integracao-continua.md)
 
 ---
