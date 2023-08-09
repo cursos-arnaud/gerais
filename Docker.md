@@ -11,6 +11,7 @@
 > - [Networks](#networks)
 > - [Compose](#compose)
 > - [Dependência entre containers](#dependência-entre-containers)
+> - [Substituir o Docker Desktop por Colima](#colima)
 
 ---
 
@@ -463,3 +464,110 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 EXPOSE 3000
 ```
+
+### Colima
+
+#### Como substituir o runtime de Container do Docker pelo Colima
+
+Remove o docker desktop
+```console
+sudo /Applications/Docker.app/Contents/MacOS/uninstall
+```
+
+Instalar o Docker CLI
+```console
+brew install docker
+```
+
+Instalar o Colima
+```console
+brew install colima
+```
+
+Habilita o nerdctl (necessário para usar o containerd)
+```console
+colima nerdctl install
+```
+
+#### Sobrescreve o endereço do Docker Socks
+
+***Bash***
+
+Adicione o export no .bashrc
+```console
+export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
+```
+
+***ZSH***
+
+Adicione o export no .zshrc (ou .zshenv)
+```console
+export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
+```
+
+***FISH***
+
+Adicione o export no config.fish
+```console
+set -x DOCKER_HOST "unix://$HOME/.colima/docker.sock"
+```
+
+> #### Em seguida reinicie o terminal para atualizar as variáveis.
+
+***Iniciar o Colima***
+```console
+colima start
+```
+
+***Testar o Docker CLI***
+```console
+docker info
+```
+
+Caso apareça a mensagem:
+
+```console 
+Client: Docker Engine - Community
+ Version:    24.0.2
+ Context:    default
+ Debug Mode: false
+
+Server:
+ERROR: Cannot connect to the Docker daemon at unix:///Users/cora/.colima/docker.sock. Is the docker daemon running?
+errors pretty printing info
+```
+
+Execute:
+
+```console 
+colima delete
+```
+
+```console 
+colima start
+```
+
+#### Sobrescrever configurações do Testcontainers
+
+***Bash:***
+Adicione o export no .bashrc
+```console 
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
+```
+
+***ZSH:***
+Adicione o export no .zshrc (ou .zshenv)
+```console 
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export DOCKER_HOST="unix:/x/${HOME}/.colima/docker.sock"
+```
+
+***FISH:***
+Adicione o export no config.fish
+```console 
+set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
+set -x DOCKER_HOST unix://{$HOME}/.colima/docker.sock
+```
+
+> #### Em seguida reinicie o terminal para atualizar as variáveis.

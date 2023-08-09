@@ -5,6 +5,8 @@
 >
 > - [Home](README.md)
 > - [Introdução](#introdução)
+> - [Iniciando com CI](#iniciando-com-ci)
+> - [Configurar workflow no PR](#configurar-workflow-no-pr)
 
 ---
 
@@ -94,3 +96,7 @@ Workflows
 
 Detalhe do workflow
 ![actions](images/actions-detail-2.png)
+
+### Configurar workflow no PR
+
+Documentação: https://docs.github.com/pt/actions
