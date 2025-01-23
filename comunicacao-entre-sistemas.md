@@ -111,3 +111,89 @@ receber dados demais ou de menos.
 Em resumo, o GraphQL melhora a eficiência das APIs, otimizando o tráfego de dados e tornando as interações 
 cliente-servidor mais flexíveis e dinâmicas.
 
+---    
+
+### GRPC
+É um framework desenvolvido pela Google que tem o objetivo de facilitar o processo de comunicação entre sistemas de 
+uma forma extremamente rápida, leve, independente de linguagem, ele faz parte da CNCF(Cloud Native Computing Foundation)
+
+#### Onde podemos utilizar
+* ideal para microserviços
+* Mobile, Browsers e Backend
+* Geração das bibliotecas de forma automática
+* Streaming bidirecional utilizando HTTP/2
+
+#### Liguagens (Suporte oficial)
+* gRPC-GO
+* gRPC-JAVA
+* gRPC-C
+  * C++
+  * Python
+  * Ruby
+  * Objective C
+  * PHP
+  * C#
+  * Node.js
+  * Dart
+
+#### RPC (Remote Procedure Call)
+Chamada Remota em um serviço que está em um servidor
+
+#### Protocol Buffers
+Protocolo utilizado para trafegar dados em formato binário, necessário a serialização e desserialização,
+[mais detalhes aqui](https://protobuf.dev/)
+
+***Protocol Buffers VS Json***
+* arquivos binários < JSON
+* Processo de serializaçãoé mais leve(CPU) do que JSON
+* Gasta menos recurso de rede
+* Processo é mais veloz
+
+```protobuf
+  syntax = "proto3";
+    
+  message SearchRequest {
+    string query = 1;
+    int32 page_number = 2;
+    int32 result_per_page = 3;
+  }
+  
+```
+
+#### HTTP/2
+* Nome original criado pela Google era SPDY
+* Lançado em 2015
+* Dados trafegados são binários e não texto como no HTTP 1.1
+* Utiliza a mesma conexão TCP para enviar e receber dados do cliente e do servidor (Multiplex)
+* Server Push
+* Headers são comprimidos
+* Gasta menos recursos de rede
+* Processo é mais veloz
+
+
+#### Formatos de comunicação 
+
+##### gRPC - API "unary"
+![API unary](images/grpc-api-unary.png)
+
+##### gRPC - API "Server streaming"
+![Server streaming](images/grpc-server-streaming.png)
+
+##### gRPC - API "Client streaming" 
+![Client streaming](images/grpc-client-streaming.png)
+
+##### gRPC - API "Bi directional streaming" 
+![Client streaming](images/grpc-api-bi-directional-streaming.png)
+
+
+#### REST vs gRPC
+| REST                                | gRPC                       |
+|-------------------------------------|----------------------------|
+| Texto / JSON                        | Protocol Buffers           |
+| Unidirecional                       | Bidirecional e Assíncrono  |
+| Alta latência                       | Baixa latência             |
+| Sem contrato(maior chance de erros) | Contrato definido (.proto) |
+| Sem suporte a streaming (Req/Resp)  | Suporte a streaming        |
+| Design pré-definido                 | Design é livre             |
+| Biblioteca de terceiro              | Geração de código          |
+
