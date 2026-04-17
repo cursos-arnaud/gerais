@@ -33,3 +33,25 @@ flowchart TB
     ops -->|"HTTP REST\n/backoffice/recipients"| bsr
     bsr -->|"New Relic Agent\n(traces, logs, métricas)"| newrelic
 ```
+
+```mermaid
+C4Container
+    title Containers do bankslip-recipients
+
+    Container(app, "bankslip-recipients", "Spring Boot / Kotlin 1.9 / JVM 17", "Microsserviço principal")
+    ContainerDb(pg, "PostgreSQL 15", "Relacional", "Armazena beneficiários, contas bancárias, empresas, tokens JD e outbox de eventos")
+    Container_Ext(kafka, "Apache Kafka", "Confluent + Schema Registry (Avro)", "Barramento de eventos e comandos assíncronos")
+
+    System_Ext(jd, "JD / Nuclea", "API HTTPS")
+    System_Ext(funding, "Funding", "HTTP REST interno")
+    System_Ext(smb, "SMB", "HTTP REST interno")
+    System_Ext(scheduler_svc, "kafka-message-scheduler", "Serviço Kafka")
+
+    Rel(app, pg, "Lê e escreve (JPA/Flyway)", "JDBC / TCP 5432")
+    Rel(app, kafka, "Consome e produz mensagens Avro", "TCP 9092")
+    Rel(app, jd, "Autentica, cadastra e verifica via HTTP", "HTTPS")
+    Rel(app, funding, "Busca dados de conta bancária", "HTTP")
+    Rel(app, smb, "Busca dados de empresa", "HTTP")
+    Rel(kafka, app, "Entrega eventos e comandos agendados", "TCP 9092")
+    Rel(app, scheduler_svc, "Envia comandos para agendamento", "Kafka")
+```
