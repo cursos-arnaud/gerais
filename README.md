@@ -9,6 +9,7 @@
 
 ---
 
+```mermaid
 flowchart TB
     ops(["👤 Time de Operações\nIntervenções manuais"])
 
@@ -31,3 +32,4 @@ flowchart TB
     scheduler -->|"Kafka: bankslip-recipients-internal-command-register\nbankslip-recipients-command-check"| bsr
     ops -->|"HTTP REST\n/backoffice/recipients"| bsr
     bsr -->|"New Relic Agent\n(traces, logs, métricas)"| newrelic
+```
